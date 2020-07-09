@@ -163,6 +163,15 @@
       config.tcpCandidatePolicy = RTCTcpCandidatePolicyDisabled;
     }
   }
+    
+  if (json[@"sdpSemantics"] != nil && [json[@"sdpSemantics"] isKindOfClass:[NSString class]]) {
+      NSString *sdpSemantics = json[@"sdpSemantics"];
+      if([sdpSemantics isEqualToString:@"UNIFIED_PLAN"]) {
+        config.sdpSemantics = RTCSdpSemanticsUnifiedPlan
+      } else if([sdpSemantics isEqualToString:@"PLAN_B"]) {
+        config.sdpSemantics = RTCSdpSemanticsPlanB
+      }
+  }
 
   return config;
 }
